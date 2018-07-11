@@ -1,0 +1,30 @@
+{
+  "name": "@ailrun/npm-starter",
+  "version": "1.0.0",
+  "description": "NPM package/project bootstrapper for Junyoung Clare Jang",
+  "keywords": [
+    "boilerplate",
+    "bootstraper",
+    "package",
+    "project",
+    "npm"
+  ],
+  "homepage": "https://github.com/Ailrun/npm-starter#readme",
+  "bugs": "https://github.com/Ailrun/npm-starter/issues",
+  "license": "MIT",
+  "author": {
+    "name": "Junyoung Clare Jang",
+    "email": "jjc9310@gmail.com",
+    "url": "https://Ailrun.github.io"
+  },
+  "files": [
+    "*"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Ailrun/npm-starter.git"
+  },
+  "scripts": {
+  },
+  "dependencies": {}
+}
