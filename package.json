@@ -24,7 +24,10 @@
     "type": "git",
     "url": "https://github.com/Ailrun/npm-starter.git"
   },
-  "scripts": {
-  },
-  "dependencies": {}
+  "scripts": {},
+  "dependencies": {},
+  "devDependencies": {
+    "commitlint": "^7.0.0",
+    "husky": "^1.0.0-rc.13"
+  }
 }
