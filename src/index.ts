@@ -1,3 +1,2 @@
-export const run = () => {
-  console.log('npm-starter');
+export const createProject = () => {
 };

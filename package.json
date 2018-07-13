@@ -33,7 +33,10 @@
     "build": "tsc -p ./tsconfig.json",
     "watch": "tsc -w --preserveWatchOutput -p ./tsconfig.json"
   },
-  "dependencies": {},
+  "dependencies": {
+    "figlet": "^1.2.0",
+    "gradient-string": "^1.1.0"
+  },
   "devDependencies": {
     "commitlint": "^7.0.0",
     "husky": "^1.0.0-rc.13",
