@@ -1,2 +1,1 @@
-export const createProject = () => {
-};
+export * from './lib';
