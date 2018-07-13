@@ -20,6 +20,11 @@
   "files": [
     "*"
   ],
+  "main": "./dist/index.js",
+  "bin": {
+    "npm-starter": "./dist/npm-starter.js"
+  },
+  "types": "./dist/index.d.ts",
   "repository": {
     "type": "git",
     "url": "https://github.com/Ailrun/npm-starter.git"
