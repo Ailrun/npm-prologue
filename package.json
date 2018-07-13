@@ -24,10 +24,14 @@
     "type": "git",
     "url": "https://github.com/Ailrun/npm-starter.git"
   },
-  "scripts": {},
+  "scripts": {
+    "build": "tsc -p ./tsconfig.json",
+    "watch": "tsc -w --preserveWatchOutput -p ./tsconfig.json"
+  },
   "dependencies": {},
   "devDependencies": {
     "commitlint": "^7.0.0",
-    "husky": "^1.0.0-rc.13"
+    "husky": "^1.0.0-rc.13",
+    "typescript": "^2.9.2"
   }
 }
