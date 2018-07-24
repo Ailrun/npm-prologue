@@ -1,5 +1,5 @@
 {
-  "name": "@ailrun/npm-starter",
+  "name": "npm-prologue",
   "version": "1.0.0",
   "description": "NPM package/project bootstrapper for Junyoung Clare Jang",
   "keywords": [
@@ -9,8 +9,8 @@
     "project",
     "npm"
   ],
-  "homepage": "https://github.com/Ailrun/npm-starter#readme",
-  "bugs": "https://github.com/Ailrun/npm-starter/issues",
+  "homepage": "https://github.com/Ailrun/npm-prologue#readme",
+  "bugs": "https://github.com/Ailrun/npm-prologue/issues",
   "license": "MIT",
   "author": {
     "name": "Junyoung Clare Jang",
@@ -22,12 +22,12 @@
   ],
   "main": "./dist/index.js",
   "bin": {
-    "npm-starter": "./dist/npm-starter.js"
+    "npm-prologue": "./dist/npm-prologue.js"
   },
   "types": "./dist/index.d.ts",
   "repository": {
     "type": "git",
-    "url": "https://github.com/Ailrun/npm-starter.git"
+    "url": "https://github.com/Ailrun/npm-prologue.git"
   },
   "scripts": {
     "build": "tsc -p ./tsconfig.json",
