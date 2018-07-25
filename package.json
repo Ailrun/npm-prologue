@@ -38,6 +38,7 @@
     "gradient-string": "^1.1.0"
   },
   "devDependencies": {
+    "@types/node": "^10.5.3",
     "commitlint": "^7.0.0",
     "husky": "^1.0.0-rc.13",
     "typescript": "^2.9.2"
