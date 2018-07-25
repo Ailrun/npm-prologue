@@ -21,6 +21,7 @@ module.exports = {
         'package',
         'cli',
         'lib',
+        'test',
       ],
     ],
     'scope-empty': [
