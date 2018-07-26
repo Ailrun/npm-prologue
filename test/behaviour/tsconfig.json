@@ -1,11 +1,7 @@
 {
-  "extends": "../../tsconfig.json",
+  "extends": "../../config/tsconfig/tsconfig.test.json",
   "compilerOptions": {
-    "baseUrl": "../..",
-    "lib": [
-      "ES6"
-    ],
-    "types": ["node", "mocha", "../../src/local"]
+    "baseUrl": "."
   },
   "include": [
     "../../src",

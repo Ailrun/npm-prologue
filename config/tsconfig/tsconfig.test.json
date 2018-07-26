@@ -1,0 +1,17 @@
+{
+  "extends": "./tsconfig.base.json",
+  "compilerOptions": {
+    "baseUrl": "../..",
+    "lib": [
+      "ES6"
+    ],
+    "paths": {
+      "$/*": ["../../src/*"]
+    },
+    "types": ["node", "jest", "../../src/local"]
+  },
+  "include": [
+    "../../src",
+    "../../test"
+  ]
+}
