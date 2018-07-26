@@ -1,0 +1,27 @@
+language: node_js
+
+notifications:
+  email: false
+
+branches:
+  only:
+    - master
+
+cache:
+  directories:
+    - node_modules
+
+git:
+  depth: 3
+
+matrix:
+  include:
+    - name: "test/10"
+      node_js: "10"
+      env: TASK_TYPE=test
+
+before_install: source ./ci/travis/before_install.sh
+
+install: source ./ci/travis/install.sh
+
+script: source ./ci/travis/script.sh
