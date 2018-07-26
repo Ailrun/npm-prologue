@@ -33,7 +33,7 @@
     "build": "tsc -p ./tsconfig.json",
     "watch": "tsc -w --preserveWatchOutput -p ./tsconfig.json",
     "test": "npm-run-all -s test:*",
-    "test:behaviour": "cross-env TS_NODE_PROJECT=./test/behaviour/tsconfig.json mocha -r ts-node/register ./test/behaviour/**/*.ts",
+    "test:behaviour": "cross-env TS_NODE_PROJECT=./test/behaviour/tsconfig.json mocha -r ts-node/register \"./test/behaviour/**/*.ts\"",
     "test:types": "dtslint ./test/types"
   },
   "dependencies": {
