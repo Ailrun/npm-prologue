@@ -2,7 +2,6 @@ module.exports = {
   errorOnDeprecated: true,
   globals: {
     'ts-jest': {
-      skipBabel: true,
       tsConfigFile: './config/tsconfig/tsconfig.test.json',
     },
   },
