@@ -42,7 +42,8 @@
   "dependencies": {
     "figlet": "^1.2.0",
     "gradient-string": "^1.1.0",
-    "mkdirp": "^0.5.1"
+    "mkdirp": "^0.5.1",
+    "ramda": "^0.25.0"
   },
   "devDependencies": {
     "@types/chai": "^4.1.4",
@@ -50,6 +51,7 @@
     "@types/memory-fs": "^0.3.1",
     "@types/mkdirp": "^0.5.2",
     "@types/node": "^10.5.3",
+    "@types/ramda": "^0.25.36",
     "@types/rimraf": "^2.0.2",
     "commitlint": "^7.0.0",
     "dtslint": "^0.3.0",
