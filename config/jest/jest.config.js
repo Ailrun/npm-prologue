@@ -13,7 +13,7 @@ module.exports = {
   },
   rootDir: '../../',
   testMatch: [
-    '<rootDir>/test/behaviour/**/*.ts',
+    '<rootDir>/test/behaviour/**/*.test.ts',
   ],
   transform: {
     '^.+\\.tsx?$': 'ts-jest',
