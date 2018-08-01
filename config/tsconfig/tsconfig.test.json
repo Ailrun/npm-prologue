@@ -1,13 +1,17 @@
 {
   "extends": "./tsconfig.base.json",
   "compilerOptions": {
-    "baseUrl": "../..",
     "lib": [
-      "ES6"
+      "ES7"
     ],
-    "paths": {
-      "$/*": ["../../src/*"]
-    },
+    "noImplicitAny": false,
+    "noImplicitReturns": false,
+    "noImplicitThis": false,
+    "noUnusedParameters": false,
+    "strict": false,
+    "strictFunctionTypes": false,
+    "strictPropertyInitialization": false,
+    "strictNullChecks": false,
     "types": ["node", "jest", "../../src/local"]
   },
   "include": [

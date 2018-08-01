@@ -20,6 +20,9 @@
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "outDir": "../../dist/",
+    "paths": {
+      "$/*": ["src/*"]
+    },
     "pretty": true,
     "skipLibCheck": true,
     "strict": true,
