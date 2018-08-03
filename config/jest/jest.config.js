@@ -2,7 +2,6 @@ module.exports = {
   errorOnDeprecated: true,
   globals: {
     'ts-jest': {
-      skipBabel: true,
       tsConfigFile: './config/tsconfig/tsconfig.test.json',
     },
   },
@@ -14,7 +13,7 @@ module.exports = {
   },
   rootDir: '../../',
   testMatch: [
-    '<rootDir>/test/behaviour/**/*.ts',
+    '<rootDir>/test/behaviour/**/*.test.ts',
   ],
   transform: {
     '^.+\\.tsx?$': 'ts-jest',
