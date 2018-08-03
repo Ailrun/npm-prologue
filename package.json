@@ -30,7 +30,9 @@
     "url": "https://github.com/Ailrun/npm-prologue.git"
   },
   "scripts": {
-    "build": "tsc -p ./tsconfig.json",
+    "build": "npm-run-all -s build:compile build:permission",
+    "build:compile": "tsc -p ./tsconfig.json",
+    "build:permission": "node ./scripts/build/permission.js",
     "watch": "tsc -w --preserveWatchOutput -p ./tsconfig.json",
     "test": "npm-run-all -s test:*",
     "test:behaviour": "jest --config=./config/jest/jest.config.js",
