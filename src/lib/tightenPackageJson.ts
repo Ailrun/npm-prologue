@@ -42,7 +42,7 @@ export const tightenPackageJson = (packageJson: PackageJson): PackageJson.Strict
   };
 };
 
-const tightenBugs = (bugs: Exclude<PackageJson.Base['bugs'], undefined>): PackageJson.StrictBase['bugs'] => {
+const tightenBugs = (bugs: PackageJson.Bugs): PackageJson.StrictBase['bugs'] => {
   if (typeof bugs !== 'string') {
     return bugs;
   }
@@ -52,7 +52,7 @@ const tightenBugs = (bugs: Exclude<PackageJson.Base['bugs'], undefined>): Packag
   };
 };
 
-const tightenPeople = (people: Exclude<PackageJson.Base['author'], undefined>): PackageJson.People => {
+const tightenPeople = (people: PackageJson.Author): PackageJson.People => {
   if (typeof people !== 'string') {
     return people;
   }
@@ -82,7 +82,7 @@ const parsePeople = (people: string): PackageJson.People => {
   return result;
 };
 
-const tightenBin = (packageName: string, bin: Exclude<PackageJson.Base['bin'], undefined>): PackageJson.StrictBase['bin'] => {
+const tightenBin = (packageName: string, bin: PackageJson.Bin): PackageJson.StrictBase['bin'] => {
   if (typeof bin !== 'string') {
     return bin;
   }
@@ -92,7 +92,7 @@ const tightenBin = (packageName: string, bin: Exclude<PackageJson.Base['bin'], u
   };
 };
 
-const tightenRepository = (repository: Exclude<PackageJson.Base['repository'], undefined>): PackageJson.StrictBase['repository'] => {
+const tightenRepository = (repository: PackageJson.Repository): PackageJson.StrictBase['repository'] => {
   let result: any;
 
   if (typeof repository === 'string') {

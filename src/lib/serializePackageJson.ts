@@ -26,7 +26,7 @@ const peopleShape: serializationShape<PackageJson.People> = {
   ],
 };
 
-const directoriesShape: serializationShape<Exclude<PackageJson.StrictBase['directories'], undefined>> = {
+const directoriesShape: serializationShape<PackageJson.Directories> = {
   order: [
     'lib',
     'bin',
@@ -37,14 +37,14 @@ const directoriesShape: serializationShape<Exclude<PackageJson.StrictBase['direc
   ],
 };
 
-const repositoryShape: serializationShape<Exclude<PackageJson.StrictBase['repository'], undefined>> = {
+const repositoryShape: serializationShape<Extract<PackageJson.Repository, object>> = {
   order: [
     'type',
     'url',
   ],
 };
 
-const scriptShape: serializationShape<Exclude<PackageJson.StrictBase['scripts'], undefined>> = {
+const scriptShape: serializationShape<PackageJson.Scripts> = {
   order: [
     'prepare',
     'prepublishOnly',
