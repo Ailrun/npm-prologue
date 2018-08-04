@@ -2,6 +2,9 @@ export namespace TypeUtils {
   export type Required<T> = {
     [K in keyof T]-?: T[K];
   };
+  export type Writable<T> = {
+    -readonly[K in keyof T]: T[K];
+  };
 
   export type Defined<T> = Exclude<T, undefined>;
   export type Omit<T, K extends keyof T> = Pick<T, Exclude<keyof T, K>>;
