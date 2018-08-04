@@ -31,10 +31,14 @@ module.exports = {
     'scope-case': [
       0,
     ],
+    /**
+     * @desc
+     * Block sentence case to allow uppercase letter only after some verb or statement.
+     */
     'subject-case': [
       2,
-      'always',
-      'lowerCase',
+      'never',
+      'sentence-case',
     ],
     'subject-empty': [
       0,
