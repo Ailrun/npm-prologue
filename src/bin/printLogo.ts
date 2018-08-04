@@ -7,7 +7,9 @@ import packageJson from '../../package.json';
 
 export const printLogo = async () => {
   const packageName = packageJson.name;
-  const asciiLogo = await promisify<string, string | undefined>(figlet)(packageName);
+  const asciiLogo = await promisify<string, figlet.Options, string | undefined>(figlet)(packageName, {
+    horizontalLayout: 'fitted',
+  });
 
   if (asciiLogo === undefined) {
     console.log(gradient.pastel(packageName));
