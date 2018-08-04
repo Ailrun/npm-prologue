@@ -42,6 +42,7 @@
   "dependencies": {
     "figlet": "^1.2.0",
     "gradient-string": "^1.1.0",
+    "hosted-git-info": "^2.7.1",
     "mkdirp": "^0.5.1",
     "ramda": "^0.25.0"
   },
