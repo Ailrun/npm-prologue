@@ -1,1 +1,1 @@
-export { createProject } from './createProject';
+export { createPackageJson } from './createPackageJson';
