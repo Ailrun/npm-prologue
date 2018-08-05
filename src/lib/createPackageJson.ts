@@ -10,7 +10,6 @@ import { serializePackageJson } from './serializePackageJson';
 import { tightenPackageJson } from './tightenPackageJson';
 
 export interface createPackageJsonOptions {
-  readonly type: 'javascript' | 'typescript';
   readonly directory?: string;
   readonly indent?: number | string;
   readonly npm: PackageJson.Normalized;

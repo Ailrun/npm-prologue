@@ -8,7 +8,6 @@ import { resetMemoryFs } from '../test-utils';
 jest.mock('fs', () => new (require('memory-fs'))());
 
 const testOptions0: createPackageJsonOptions = {
-  type: 'javascript',
   npm: {
     name: 'testable-package-name',
     version: '0.0.0',
@@ -22,7 +21,6 @@ const testPackageJson0 = `
 `.trim();
 
 const testOptions1: createPackageJsonOptions = {
-  type: 'typescript',
   indent: 4,
   npm: {
     name: 'my-package-test',
@@ -39,7 +37,6 @@ const testPackageJson1 = `
 `.trim();
 
 const testOptions2: createPackageJsonOptions = {
-  type: 'typescript',
   directory: '../../my_hidden_package',
   npm: {
     description: 'Shhhh... this is secret package',
@@ -63,7 +60,6 @@ describe('createProject', () => {
 
   it('should be able to execute normally with various options', async () => {
     await expect(createPackageJson({
-      type: 'javascript',
       npm: {
         name: 'test-package',
         version: '0.0.0',
@@ -72,7 +68,6 @@ describe('createProject', () => {
     resetMemoryFs(fs as any);
 
     await expect(createPackageJson({
-      type: 'javascript',
       npm: {
         name: 'test-package',
         version: '0.0.0',
@@ -82,7 +77,6 @@ describe('createProject', () => {
     resetMemoryFs(fs as any);
 
     await expect(createPackageJson({
-      type: 'typescript',
       npm: {
         name: 'test-package',
         version: '0.0.0',
@@ -91,7 +85,6 @@ describe('createProject', () => {
     resetMemoryFs(fs as any);
 
     await expect(createPackageJson({
-      type: 'typescript',
       npm: {
         name: 'test-package',
         version: '0.0.0',
@@ -102,7 +95,6 @@ describe('createProject', () => {
 
     await expect(createPackageJson({
       directory: './',
-      type: 'typescript',
       npm: {
         name: 'test-package',
         version: '0.0.0',
@@ -113,7 +105,6 @@ describe('createProject', () => {
 
     await expect(createPackageJson({
       directory: '../',
-      type: 'typescript',
       npm: {
         name: 'test-package',
         version: '0.0.0',
@@ -127,7 +118,6 @@ describe('createProject', () => {
     expect(fs.existsSync(path.resolve('./package.json'))).toBe(false);
     await createPackageJson({
       directory: './',
-      type: 'javascript',
       npm: {
         name: 'test-package',
         version: '0.0.0',
@@ -139,7 +129,6 @@ describe('createProject', () => {
     expect(fs.existsSync(path.resolve('../package.json'))).toBe(false);
     await createPackageJson({
       directory: '../',
-      type: 'javascript',
       npm: {
         name: 'test-package',
         version: '0.0.0',
@@ -151,7 +140,6 @@ describe('createProject', () => {
     expect(fs.existsSync(path.resolve('test-package/package.json'))).toBe(false);
     await createPackageJson({
       directory: 'test-package',
-      type: 'javascript',
       npm: {
         name: 'test-package',
         version: '0.0.0',
@@ -163,7 +151,6 @@ describe('createProject', () => {
     expect(fs.existsSync(path.resolve('some-dir/test-package/package.json'))).toBe(false);
     await createPackageJson({
       directory: 'some-dir/test-package',
-      type: 'javascript',
       npm: {
         name: 'test-package',
         version: '0.0.0',
@@ -175,7 +162,6 @@ describe('createProject', () => {
     expect(fs.existsSync(path.resolve('./package.json'))).toBe(false);
     await createPackageJson({
       directory: '.',
-      type: 'typescript',
       npm: {
         name: 'test-package',
         version: '0.0.0',
@@ -187,7 +173,6 @@ describe('createProject', () => {
     expect(fs.existsSync(path.resolve('/package.json'))).toBe(false);
     await createPackageJson({
       directory: '/',
-      type: 'typescript',
       npm: {
         name: 'test-package',
         version: '0.0.0',
@@ -198,7 +183,6 @@ describe('createProject', () => {
 
     expect(fs.existsSync(path.resolve('./package.json'))).toBe(false);
     await createPackageJson({
-      type: 'typescript',
       npm: {
         name: 'test-package',
         version: '0.0.0',
