@@ -10,14 +10,13 @@ import { inquirerUtils, packageRoot, processUtils } from './testUtils';
 describe('npm-prolgue', () => {
   const cwd = join(__dirname, '/__temp__');
   const execPath = join(packageRoot, 'dist/npm-prologue.js');
-  let npmPrologue: ChildProcess;
-
-  beforeEach(() => {
-    npmPrologue = spawn(execPath, [], {
+  let spawnNpmPrologue = (...args: string[]) => {
+    npmPrologue = spawn(execPath, args, {
       stdio: 'pipe',
       cwd,
     });
-  });
+  };
+  let npmPrologue: ChildProcess;
 
   afterEach(async () => {
     npmPrologue.kill();
@@ -25,6 +24,7 @@ describe('npm-prolgue', () => {
   });
 
   it('should be able to run normally', async () => {
+    spawnNpmPrologue();
     /**
      * @desc
      * `exitCode` promise should be created initially since it cannot detect
