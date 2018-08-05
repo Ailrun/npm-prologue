@@ -22,7 +22,7 @@ export const write = (stream: Writable, str: string) => {
   });
 };
 
-export const writeLn = (stream: Writable, str: string) => {
+export const writeLn = (stream: Writable, str: string = '') => {
   return write(stream, str + '\n');
 };
 
