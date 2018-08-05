@@ -35,7 +35,7 @@ describe('npm-prolgue', () => {
     const exitCodePromise = processUtils.exitCode(npmPrologue);
 
     const logo = await processUtils.read(npmPrologue.stdout);
-    expect(logo).toMatchSnapshot();
+    expect(logo).toMatchSnapshot('logo');
 
     await inquirerUtils.giveInputs(npmPrologue, [
       'test-package',
