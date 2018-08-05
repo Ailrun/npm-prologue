@@ -32,6 +32,10 @@ export const tightenPackageJson = (packageJson: PackageJson): PackageJson.Normal
     result.bin = tightenBin(packageJson.name, packageJson.bin);
   }
 
+  if (packageJson.man) {
+    result.man = tightenMan(packageJson.man);
+  }
+
   if (packageJson.repository) {
     result.repository = tightenRepository(packageJson.repository);
   }
@@ -90,6 +94,16 @@ const tightenBin = (packageName: string, bin: PackageJson.Bin): PackageJson.Norm
   return {
     [packageName]: bin,
   };
+};
+
+const tightenMan = (man: PackageJson.Man): PackageJson.Normalized.Man => {
+  if (typeof man !== 'string') {
+    return man;
+  }
+
+  return [
+    man,
+  ];
 };
 
 const tightenRepository = (repository: PackageJson.Repository): PackageJson.Normalized.Repository => {

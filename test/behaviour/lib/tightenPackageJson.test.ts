@@ -159,6 +159,20 @@ describe('tightenPackageJson', () => {
     expect(tightenPackageJson(testInputJson0)).toEqual(testOutputJson0);
   });
 
+  it('should return an object with more strict man fields', () => {
+    const testInputJson0: PackageJson = {
+      name: 'where',
+      version: '20.1.3',
+      man: 'abc.man',
+    };
+    const testOutputJson0: PackageJson.Normalized = {
+      name: 'where',
+      version: '20.1.3',
+      man: ['abc.man'],
+    };
+    expect(tightenPackageJson(testInputJson0)).toEqual(testOutputJson0);
+  });
+
   it('should return an object with more strict repository fields', () => {
     const testInputJson0: PackageJson = {
       name: 'hello-there',
