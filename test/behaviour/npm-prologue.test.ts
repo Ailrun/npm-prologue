@@ -5,7 +5,7 @@ import { promisify } from 'util';
 
 import rimraf = require('rimraf');
 
-import { inquirerUtils, packageRoot, processUtils, wait } from './testUtils';
+import { inquirerUtils, packageRoot, processUtils } from './testUtils';
 
 describe('npm-prolgue', () => {
   const cwd = join(__dirname, '/__temp__');
@@ -33,17 +33,16 @@ describe('npm-prolgue', () => {
      * Make an utility for `spawn`ing a child process with a functionality to detect exit code.
      */
     const exitCodePromise = processUtils.exitCode(npmPrologue);
+
     const logo = await processUtils.read(npmPrologue.stdout);
     expect(logo).toMatchSnapshot();
 
-    await processUtils.writeLn(npmPrologue.stdin, 'test-package');
-    await wait(100);
-
-    await processUtils.write(npmPrologue.stdin, inquirerUtils.DOWN);
-    await wait(100);
-
-    await processUtils.writeLn(npmPrologue.stdin);
-    await wait(100);
+    await inquirerUtils.giveInputs(npmPrologue, [
+      'test-package',
+      inquirerUtils.ENTER,
+      inquirerUtils.DOWN,
+      inquirerUtils.ENTER,
+    ]);
 
     const code = await exitCodePromise;
     expect(code).toBe(0);

@@ -6,10 +6,6 @@ import * as processUtils from './testUtils/processUtils';
 
 export const packageRoot = resolve(join(__dirname, '../../'));
 
-export const wait = (time: number) => new Promise((resolve) => {
-  setTimeout(resolve, time);
-});
-
 export {
   inquirerUtils,
   memoryFsUtils,
