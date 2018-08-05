@@ -37,7 +37,7 @@ describe('tightenPackageJson', () => {
       version: '5.7.1',
       bugs: 'https://this-is-url-for-bugs.com/',
     };
-    const testOutputJson0: PackageJson.Strict = {
+    const testOutputJson0: PackageJson.Normalized = {
       name: 'watashi',
       version: '5.7.1',
       bugs: {
@@ -53,7 +53,7 @@ describe('tightenPackageJson', () => {
       version: '5.7.1',
       author: 'Some One Name <some.name@everymail.xyz>',
     };
-    const testOutputJson0: PackageJson.Strict = {
+    const testOutputJson0: PackageJson.Normalized = {
       name: 'watashi',
       version: '5.7.1',
       author: {
@@ -68,7 +68,7 @@ describe('tightenPackageJson', () => {
       version: '5.7.1',
       author: 'Some One Name (https://watashi.github.io)',
     };
-    const testOutputJson1: PackageJson.Strict = {
+    const testOutputJson1: PackageJson.Normalized = {
       name: 'watashi',
       version: '5.7.1',
       author: {
@@ -83,7 +83,7 @@ describe('tightenPackageJson', () => {
       version: '5.7.1',
       author: 'This Is Weird <weird>man@weird.nation.xyz> (https://more.pages.here)',
     };
-    const testOutputJson2: PackageJson.Strict = {
+    const testOutputJson2: PackageJson.Normalized = {
       name: 'watashi',
       version: '5.7.1',
       author: {
@@ -99,7 +99,7 @@ describe('tightenPackageJson', () => {
       version: '5.7.1',
       author: 'Don Do That <where-are-<you>@stop-that().ca> (https://page.is.here/(hidden))',
     };
-    const testOutputJson3: PackageJson.Strict = {
+    const testOutputJson3: PackageJson.Normalized = {
       name: 'watashi',
       version: '5.7.1',
       author: {
@@ -124,7 +124,7 @@ describe('tightenPackageJson', () => {
         'There Is A Hacker <iam@hacker.com> (https://do.not.access-this-page.com/did-you?)',
       ],
     };
-    const testOutputJson0: PackageJson.Strict = {
+    const testOutputJson0: PackageJson.Normalized = {
       name: 'watashi',
       version: '5.7.1',
       contributors: [
@@ -149,7 +149,7 @@ describe('tightenPackageJson', () => {
       version: '5.7.1',
       bin: './test-case.js',
     };
-    const testOutputJson0: PackageJson.Strict = {
+    const testOutputJson0: PackageJson.Normalized = {
       name: 'watashi',
       version: '5.7.1',
       bin: {
@@ -165,7 +165,7 @@ describe('tightenPackageJson', () => {
       version: '12.4.3',
       repository: 'user/repo',
     };
-    const testOutputJson0: PackageJson.Strict = {
+    const testOutputJson0: PackageJson.Normalized = {
       name: 'hello-there',
       version: '12.4.3',
       repository: {
@@ -180,7 +180,7 @@ describe('tightenPackageJson', () => {
       version: '12.4.3',
       repository: 'github:user/repo',
     };
-    const testOutputJson1: PackageJson.Strict = {
+    const testOutputJson1: PackageJson.Normalized = {
       name: 'hello-there',
       version: '12.4.3',
       repository: {
@@ -195,7 +195,7 @@ describe('tightenPackageJson', () => {
       version: '12.4.3',
       repository: 'gist:11081aaa281',
     };
-    const testOutputJson2: PackageJson.Strict = {
+    const testOutputJson2: PackageJson.Normalized = {
       name: 'hello-there',
       version: '12.4.3',
       repository: {
