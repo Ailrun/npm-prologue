@@ -2,8 +2,8 @@ import { fromUrl } from 'hosted-git-info';
 
 import { PackageJson, TypeUtils } from '../types';
 
-export const tightenPackageJson = (packageJson: PackageJson): PackageJson.Strict => {
-  const result: TypeUtils.Writable<PackageJson.StrictBase> = {
+export const tightenPackageJson = (packageJson: PackageJson): PackageJson.Normalized => {
+  const result: TypeUtils.Writable<PackageJson.Normalized.WellKnown> = {
     name: packageJson.name,
     version: packageJson.version,
   };
@@ -42,7 +42,7 @@ export const tightenPackageJson = (packageJson: PackageJson): PackageJson.Strict
   };
 };
 
-const tightenBugs = (bugs: PackageJson.Bugs): PackageJson.StrictBase['bugs'] => {
+const tightenBugs = (bugs: PackageJson.Bugs): PackageJson.Normalized.Bugs => {
   if (typeof bugs !== 'string') {
     return bugs;
   }
@@ -82,7 +82,7 @@ const parsePeople = (people: string): PackageJson.People => {
   return result;
 };
 
-const tightenBin = (packageName: string, bin: PackageJson.Bin): PackageJson.StrictBase['bin'] => {
+const tightenBin = (packageName: string, bin: PackageJson.Bin): PackageJson.Normalized.Bin => {
   if (typeof bin !== 'string') {
     return bin;
   }
@@ -92,7 +92,7 @@ const tightenBin = (packageName: string, bin: PackageJson.Bin): PackageJson.Stri
   };
 };
 
-const tightenRepository = (repository: PackageJson.Repository): PackageJson.StrictBase['repository'] => {
+const tightenRepository = (repository: PackageJson.Repository): PackageJson.Normalized.Repository => {
   let result: any;
 
   if (typeof repository === 'string') {

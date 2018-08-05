@@ -13,7 +13,7 @@ export interface createPackageJsonOptions {
   readonly type: 'javascript' | 'typescript';
   readonly directory?: string;
   readonly indent?: number | string;
-  readonly npm: PackageJson.Strict;
+  readonly npm: PackageJson.Normalized;
   [key: string]: any;
 }
 

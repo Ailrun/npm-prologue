@@ -5,7 +5,7 @@ import { PackageJson } from '../types';
 import { indent, serializeJsonWithShape, serializationShape } from './serializeJsonWithShape';
 
 export const serializePackageJson = (
-  packageJson: PackageJson.Strict,
+  packageJson: PackageJson.Normalized,
   indent: number | string = 2,
 ): string => {
   return serializeJsonWithShape(packageJson, indent, packageJsonStrictBaseShape);
@@ -37,7 +37,7 @@ const directoriesShape: serializationShape<PackageJson.Directories> = {
   ],
 };
 
-const repositoryShape: serializationShape<Extract<PackageJson.Repository, object>> = {
+const repositoryShape: serializationShape<PackageJson.Normalized.Repository> = {
   order: [
     'type',
     'url',
@@ -78,7 +78,7 @@ const scriptShape: serializationShape<PackageJson.Scripts> = {
   ],
 }
 
-const packageJsonStrictBaseShape: serializationShape<PackageJson.StrictBase> = {
+const packageJsonStrictBaseShape: serializationShape<PackageJson.Normalized.WellKnown> = {
   order: [
     'name',
     'version',
@@ -117,20 +117,20 @@ const packageJsonStrictBaseShape: serializationShape<PackageJson.StrictBase> = {
     'publishConfig',
   ],
   subserializers: {
-    bugs(bugs: PackageJson.StrictBase['bugs'], space) {
+    bugs(bugs: PackageJson.Normalized.Bugs | undefined, space) {
       if (bugs === undefined) {
         return undefined;
       }
       return serializeJsonWithShape(bugs, space, bugsShape);
     },
-    author(author: PackageJson.StrictBase['author'], space) {
+    author(author: PackageJson.Normalized.Author | undefined, space) {
       if (author === undefined) {
         return undefined;
       }
 
       return serializeJsonWithShape(author, space, peopleShape);
     },
-    contributors(contributors: PackageJson.StrictBase['contributors'], space) {
+    contributors(contributors: PackageJson.Normalized.Contributors | undefined, space) {
       if (contributors === undefined) {
         return undefined;
       }
@@ -143,7 +143,7 @@ const packageJsonStrictBaseShape: serializationShape<PackageJson.StrictBase> = {
         R.identity as (a: string[]) => string[];
 
       return R.pipe(
-        R.map((contributor: Exclude<PackageJson.StrictBase['contributors'], undefined>[0]) => {
+        R.map((contributor: PackageJson.People) => {
           return serializeJsonWithShape(contributor, space, peopleShape);
         }),
         addingSpaces,
@@ -155,21 +155,21 @@ const packageJsonStrictBaseShape: serializationShape<PackageJson.StrictBase> = {
         ])
       )(contributors);
     },
-    directories(directories: PackageJson.StrictBase['directories'], space) {
+    directories(directories: PackageJson.Normalized.Directories, space) {
       if (directories === undefined) {
         return undefined;
       }
 
       return serializeJsonWithShape(directories, space, directoriesShape);
     },
-    repository(repository: PackageJson.StrictBase['repository'], space) {
+    repository(repository: PackageJson.Normalized.Repository, space) {
       if (repository === undefined) {
         return undefined;
       }
 
       return serializeJsonWithShape(repository, space, repositoryShape);
     },
-    scripts(scripts: PackageJson.StrictBase['scripts'], space) {
+    scripts(scripts: PackageJson.Normalized.Scripts, space) {
       if (scripts === undefined) {
         return undefined;
       }

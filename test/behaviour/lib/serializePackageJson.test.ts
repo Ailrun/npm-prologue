@@ -192,7 +192,9 @@ const testObject5 = {
     'fake',
     'directories',
   ],
-  man: 'super-awesome-package.man',
+  man: [
+    'super-awesome-package.man',
+  ],
   directories: {
     bin: 'mybin',
     example: 'hisexample',
@@ -297,7 +299,9 @@ const testJsonRegExp5_0 = RegExp(`
     ".*": ".*",
     ".*": ".*"
   },
-  "man": "super-awesome-package.man",
+  "man": \\[
+    "super-awesome-package.man"
+  \\],
   "directories": {
     "lib": "ourlib",
     "bin": "mybin",
