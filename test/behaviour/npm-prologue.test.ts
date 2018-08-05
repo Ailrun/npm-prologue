@@ -4,7 +4,7 @@ import { promisify } from 'util';
 
 import rimraf = require('rimraf');
 
-import { exitCode, packageRoot, stdoutData } from './test-utils';
+import { packageRoot, processUtils } from './testUtils';
 
 const execPath = join(packageRoot, 'dist/npm-prologue.js');
 
@@ -21,10 +21,10 @@ describe('npm-prolgue', () => {
       stdio: 'pipe',
       cwd: join(__dirname, '/__temp__'),
     });
-    const logo = await stdoutData(npmPrologue.stdout);
+    const logo = await processUtils.read(npmPrologue.stdout);
     expect(logo).toMatchSnapshot();
 
-    const code = await exitCode(npmPrologue);
+    const code = await processUtils.exitCode(npmPrologue);
     expect(code).toBe(0);
   });
 });

@@ -3,7 +3,7 @@ import path from 'path';
 
 import { createPackageJson, createPackageJsonOptions } from '$/lib/createPackageJson';
 
-import { resetMemoryFs } from '../test-utils';
+import { memoryFsUtils } from '../testUtils';
 
 jest.mock('fs', () => new (require('memory-fs'))());
 
@@ -55,7 +55,7 @@ const testPackageJson2 = `
 describe('createProject', () => {
   afterEach(() => {
     jest.restoreAllMocks();
-    resetMemoryFs(fs as any);
+    memoryFsUtils.reset(fs as any);
   });
 
   it('should be able to execute normally with various options', async () => {
@@ -65,7 +65,7 @@ describe('createProject', () => {
         version: '0.0.0',
       },
     })).resolves.not.toThrowError();
-    resetMemoryFs(fs as any);
+    memoryFsUtils.reset(fs as any);
 
     await expect(createPackageJson({
       npm: {
@@ -74,7 +74,7 @@ describe('createProject', () => {
         description: ''
       },
     })).resolves.not.toThrowError();
-    resetMemoryFs(fs as any);
+    memoryFsUtils.reset(fs as any);
 
     await expect(createPackageJson({
       npm: {
@@ -82,7 +82,7 @@ describe('createProject', () => {
         version: '0.0.0',
       },
     })).resolves.not.toThrowError();
-    resetMemoryFs(fs as any);
+    memoryFsUtils.reset(fs as any);
 
     await expect(createPackageJson({
       npm: {
@@ -91,7 +91,7 @@ describe('createProject', () => {
         description: ''
       },
     })).resolves.not.toThrowError();
-    resetMemoryFs(fs as any);
+    memoryFsUtils.reset(fs as any);
 
     await expect(createPackageJson({
       directory: './',
@@ -101,7 +101,7 @@ describe('createProject', () => {
         description: ''
       },
     })).resolves.not.toThrowError();
-    resetMemoryFs(fs as any);
+    memoryFsUtils.reset(fs as any);
 
     await expect(createPackageJson({
       directory: '../',
@@ -111,7 +111,7 @@ describe('createProject', () => {
         description: ''
       },
     })).resolves.not.toThrowError();
-    resetMemoryFs(fs as any);
+    memoryFsUtils.reset(fs as any);
   });
 
   it('should write package.json file to appropriate path', async () => {
@@ -124,7 +124,7 @@ describe('createProject', () => {
       },
     });
     expect(fs.existsSync(path.resolve('./package.json'))).toBe(true);
-    resetMemoryFs(fs as any);
+    memoryFsUtils.reset(fs as any);
 
     expect(fs.existsSync(path.resolve('../package.json'))).toBe(false);
     await createPackageJson({
@@ -135,7 +135,7 @@ describe('createProject', () => {
       },
     });
     expect(fs.existsSync(path.resolve('../package.json'))).toBe(true);
-    resetMemoryFs(fs as any);
+    memoryFsUtils.reset(fs as any);
 
     expect(fs.existsSync(path.resolve('test-package/package.json'))).toBe(false);
     await createPackageJson({
@@ -146,7 +146,7 @@ describe('createProject', () => {
       },
     });
     expect(fs.existsSync(path.resolve('test-package/package.json'))).toBe(true);
-    resetMemoryFs(fs as any);
+    memoryFsUtils.reset(fs as any);
 
     expect(fs.existsSync(path.resolve('some-dir/test-package/package.json'))).toBe(false);
     await createPackageJson({
@@ -157,7 +157,7 @@ describe('createProject', () => {
       },
     });
     expect(fs.existsSync(path.resolve('some-dir/test-package/package.json'))).toBe(true);
-    resetMemoryFs(fs as any);
+    memoryFsUtils.reset(fs as any);
 
     expect(fs.existsSync(path.resolve('./package.json'))).toBe(false);
     await createPackageJson({
@@ -168,7 +168,7 @@ describe('createProject', () => {
       },
     });
     expect(fs.existsSync(path.resolve('./package.json'))).toBe(true);
-    resetMemoryFs(fs as any);
+    memoryFsUtils.reset(fs as any);
 
     expect(fs.existsSync(path.resolve('/package.json'))).toBe(false);
     await createPackageJson({
@@ -179,7 +179,7 @@ describe('createProject', () => {
       },
     });
     expect(fs.existsSync(path.resolve('/package.json'))).toBe(true);
-    resetMemoryFs(fs as any);
+    memoryFsUtils.reset(fs as any);
 
     expect(fs.existsSync(path.resolve('./package.json'))).toBe(false);
     await createPackageJson({
@@ -190,20 +190,20 @@ describe('createProject', () => {
       },
     });
     expect(fs.existsSync(path.resolve('./package.json'))).toBe(true);
-    resetMemoryFs(fs as any);
+    memoryFsUtils.reset(fs as any);
   });
 
   it('should write package.json with well-ordered contents', async () => {
     await createPackageJson(testOptions0);
     expect(fs.readFileSync(path.resolve('./package.json'), 'UTF-8').trim()).toBe(testPackageJson0);
-    resetMemoryFs(fs as any);
+    memoryFsUtils.reset(fs as any);
 
     await createPackageJson(testOptions1);
     expect(fs.readFileSync(path.resolve('./package.json'), 'UTF-8').trim()).toBe(testPackageJson1);
-    resetMemoryFs(fs as any);
+    memoryFsUtils.reset(fs as any);
 
     await createPackageJson(testOptions2);
     expect(fs.readFileSync(path.resolve('../../my_hidden_package/package.json'), 'UTF-8').trim()).toBe(testPackageJson2);
-    resetMemoryFs(fs as any);
+    memoryFsUtils.reset(fs as any);
   });
 });
