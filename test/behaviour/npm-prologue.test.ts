@@ -35,6 +35,13 @@ describe('npm-prolgue', () => {
 
   it('should display a help message when there is no arguments', async () => {
     spawnNpmPrologue();
+    /**
+     * @desc
+     * `exitCode` promise should be created initially since it cannot detect
+     * already finished process.
+     * @todo
+     * Make an utility for `spawn`ing a child process with a functionality to detect exit code.
+     */
     const exitCodePromise = processUtils.exitCode(npmPrologue);
 
     const logo = await processUtils.read(npmPrologue.stdout);
@@ -60,13 +67,6 @@ describe('npm-prolgue', () => {
 
   it('should be able to run normally with an argument which is the name for new directory', async () => {
     spawnNpmPrologue('test-package');
-    /**
-     * @desc
-     * `exitCode` promise should be created initially since it cannot detect
-     * already finished process.
-     * @todo
-     * Make an utility for `spawn`ing a child process with a functionality to detect exit code.
-     */
     const exitCodePromise = processUtils.exitCode(npmPrologue);
 
     const logo = await processUtils.read(npmPrologue.stdout);
