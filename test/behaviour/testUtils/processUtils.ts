@@ -9,10 +9,7 @@ export const read = (stream: Readable) => {
 };
 
 export const readTrimed = (stream: Readable) => {
-  return new Promise<Buffer>((resolve) => {
-    stream.once('data', resolve);
-  })
-    .then((buf) => buf.toString('utf-8'))
+  return read(stream)
     .then((rawStr) => rawStr.trim());
 };
 
