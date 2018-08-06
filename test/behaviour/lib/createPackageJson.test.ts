@@ -206,4 +206,9 @@ describe('createProject', () => {
     expect(fs.readFileSync(path.resolve('../../my_hidden_package/package.json'), 'UTF-8').trim()).toBe(testPackageJson2);
     memoryFsUtils.reset(fs as any);
   });
+
+  it('should write package.json with final line feed', async () => {
+    await createPackageJson(testOptions0);
+    expect(fs.readFileSync(path.resolve('./package.json'), 'UTF-8')).toMatch(/\n}\n/);
+  });
 });

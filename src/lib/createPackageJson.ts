@@ -28,5 +28,5 @@ export const createPackageJson = async (options: createPackageJsonOptions) => {
     ...options.npm,
   });
 
-  return util.promisify(fs.writeFile.bind(fs))(packageJsonPath, serializePackageJson(packageJsonContent, indent), 'utf-8');
+  return util.promisify(fs.writeFile.bind(fs))(packageJsonPath, serializePackageJson(packageJsonContent, indent) + '\n', 'utf-8');
 };
