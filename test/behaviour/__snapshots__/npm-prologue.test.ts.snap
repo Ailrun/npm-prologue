@@ -1,16 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`npm-prolgue should be able to run normally with an argument which is the name for new directory: logo 1`] = `
-"                                                     _                            
-  _ __   _ __   _ __ ___          _ __   _ __  ___  | |  ___    __ _  _   _   ___ 
- | '_ \\\\ | '_ \\\\ | '_ \` _ \\\\  _____ | '_ \\\\ | '__|/ _ \\\\ | | / _ \\\\  / _\` || | | | / _ \\\\
- | | | || |_) || | | | | ||_____|| |_) || |  | (_) || || (_) || (_| || |_| ||  __/
- |_| |_|| .__/ |_| |_| |_|       | .__/ |_|   \\\\___/ |_| \\\\___/  \\\\__, | \\\\__,_| \\\\___|
-        |_|                      |_|                           |___/              
-"
-`;
-
-exports[`npm-prolgue should display a help message when there is no arguments: logo 1`] = `
+exports[`npm-prolgue should display a fixed logo: logo 1`] = `
 "                                                     _                            
   _ __   _ __   _ __ ___          _ __   _ __  ___  | |  ___    __ _  _   _   ___ 
  | '_ \\\\ | '_ \\\\ | '_ \` _ \\\\  _____ | '_ \\\\ | '__|/ _ \\\\ | | / _ \\\\  / _\` || | | | / _ \\\\

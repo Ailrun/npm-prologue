@@ -7,6 +7,8 @@ import rimraf = require('rimraf');
 
 import { inquirerUtils, packageRoot, processUtils } from './testUtils';
 
+let logoSnapshot: string | undefined;
+
 describe('npm-prolgue', () => {
   const cwd = join(__dirname, '/__temp__');
   const execPath = join(packageRoot, 'dist/npm-prologue.js');
@@ -23,12 +25,20 @@ describe('npm-prolgue', () => {
     await promisify(rimraf)(join(__dirname, '__temp__/*'));
   });
 
+  it('should display a fixed logo', async () => {
+    spawnNpmPrologue();
+
+    const logo = await processUtils.read(npmPrologue.stdout);
+    logoSnapshot = logo;
+    expect(logo).toMatchSnapshot('logo');
+  });
+
   it('should display a help message when there is no arguments', async () => {
     spawnNpmPrologue();
     const exitCodePromise = processUtils.exitCode(npmPrologue);
 
     const logo = await processUtils.read(npmPrologue.stdout);
-    expect(logo).toMatchSnapshot('logo');
+    expect(logo).toMatch(logoSnapshot);
 
     const helpMessage = await processUtils.readTrimed(npmPrologue.stdout);
     expect(helpMessage).toBe([
@@ -60,7 +70,7 @@ describe('npm-prolgue', () => {
     const exitCodePromise = processUtils.exitCode(npmPrologue);
 
     const logo = await processUtils.read(npmPrologue.stdout);
-    expect(logo).toMatchSnapshot('logo');
+    expect(logo).toMatch(logoSnapshot);
 
     await inquirerUtils.giveInputs(npmPrologue, [
       inquirerUtils.ENTER,
