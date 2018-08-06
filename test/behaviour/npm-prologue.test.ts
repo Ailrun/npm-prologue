@@ -1,23 +1,91 @@
-import { spawn } from 'child_process';
+import { ChildProcess, spawn } from 'child_process';
+import { readFileSync } from 'fs';
 import { join } from 'path';
 import { promisify } from 'util';
 
 import rimraf = require('rimraf');
 
-import { packageRoot } from './test-utils';
+import { inquirerUtils, packageRoot, processUtils } from './testUtils';
 
-const execPath = join(packageRoot, 'dist/npm-prologue.js');
+let logoSnapshot: string | undefined;
 
 describe('npm-prolgue', () => {
-  it('should be able to run with normally', async () => {
-    const npmPrologue = spawn(execPath, [], {
+  const cwd = join(__dirname, '/__temp__');
+  const execPath = join(packageRoot, 'dist/npm-prologue.js');
+  let spawnNpmPrologue = (...args: string[]) => {
+    npmPrologue = spawn(execPath, args, {
       stdio: 'pipe',
-      cwd: join(__dirname, '/__temp__'),
+      cwd,
     });
-    const logo = await new Promise<Buffer>((resolve) => npmPrologue.stdout.once('data', resolve));
-    expect(logo).toMatchSnapshot();
-    const code = await new Promise<number>((resolve) => npmPrologue.once('exit', resolve));
-    expect(code).toBe(0);
+  };
+  let npmPrologue: ChildProcess;
+
+  afterEach(async () => {
+    npmPrologue.kill();
     await promisify(rimraf)(join(__dirname, '__temp__/*'));
+  });
+
+  it('should display a fixed logo', async () => {
+    spawnNpmPrologue();
+
+    const logo = await processUtils.read(npmPrologue.stdout);
+    logoSnapshot = logo;
+    expect(logo).toMatchSnapshot('logo');
+  });
+
+  it('should display a help message when there is no arguments', async () => {
+    spawnNpmPrologue();
+    const exitCodePromise = processUtils.exitCode(npmPrologue);
+
+    const logo = await processUtils.read(npmPrologue.stdout);
+    expect(logo).toMatch(logoSnapshot);
+
+    const helpMessage = await processUtils.readTrimed(npmPrologue.stdout);
+    expect(helpMessage).toBe([
+      '  Usage: npm-prologue <directory-name> [options]',
+      '',
+      '  Options:',
+      '',
+      '    -h, --help  output usage information',
+      '',
+      '  Examples:',
+      '',
+      '    $ npm-prologue --help',
+      '    $ npm-prologue my-new-awesome-package',
+    ].join('\n').trim());
+
+    const code = await exitCodePromise;
+    expect(code).toBe(1);
+  }, 1000);
+
+  it('should be able to run normally with an argument which is the name for new directory', async () => {
+    spawnNpmPrologue('test-package');
+    /**
+     * @desc
+     * `exitCode` promise should be created initially since it cannot detect
+     * already finished process.
+     * @todo
+     * Make an utility for `spawn`ing a child process with a functionality to detect exit code.
+     */
+    const exitCodePromise = processUtils.exitCode(npmPrologue);
+
+    const logo = await processUtils.read(npmPrologue.stdout);
+    expect(logo).toMatch(logoSnapshot);
+
+    await inquirerUtils.giveInputs(npmPrologue, [
+      inquirerUtils.ENTER,
+      inquirerUtils.DOWN,
+      inquirerUtils.ENTER,
+    ]);
+
+    const code = await exitCodePromise;
+    expect(code).toBe(0);
+
+    expect(readFileSync(join(cwd, 'test-package', 'package.json'), 'utf-8').trim()).toBe([
+      '{',
+      '  "name": "test-package",',
+      '  "version": "0.0.1"',
+      '}',
+    ].join('\n').trim());
   });
 });

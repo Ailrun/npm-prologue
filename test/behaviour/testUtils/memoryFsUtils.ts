@@ -1,8 +1,6 @@
-import { join, resolve } from 'path';
+import { join } from 'path';
 
-export const packageRoot = resolve(join(__dirname, '../../'));
-
-export const resetMemoryFs: (
+export const reset: (
   fs: import('memory-fs'),
 ) => void = (
   fs,
