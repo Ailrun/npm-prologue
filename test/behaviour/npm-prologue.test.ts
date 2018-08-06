@@ -23,6 +23,31 @@ describe('npm-prolgue', () => {
     await promisify(rimraf)(join(__dirname, '__temp__/*'));
   });
 
+  it('should display a help message when there is no arguments', async () => {
+    spawnNpmPrologue();
+    const exitCodePromise = processUtils.exitCode(npmPrologue);
+
+    const logo = await processUtils.read(npmPrologue.stdout);
+    expect(logo).toMatchSnapshot('logo');
+
+    const helpMessage = await processUtils.readTrimed(npmPrologue.stdout);
+    expect(helpMessage).toBe([
+      '  Usage: npm-prologue <directory-name> [options]',
+      '',
+      '  Options:',
+      '',
+      '    -h, --help  output usage information',
+      '',
+      '  Examples:',
+      '',
+      '    $ npm-prologue --help',
+      '    $ npm-prologue my-new-awesome-package',
+    ].join('\n').trim());
+
+    const code = await exitCodePromise;
+    expect(code).toBe(1);
+  }, 1000);
+
   it('should be able to run normally with an argument which is the name for new directory', async () => {
     spawnNpmPrologue('test-package');
     /**
