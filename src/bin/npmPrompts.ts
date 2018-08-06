@@ -7,11 +7,14 @@ export interface NpmResponses {
   };
 }
 
-export const npmPrompts: ReadonlyArray<Question<NpmResponses>> = [
+export const npmPrompts = (
+  name: string,
+): ReadonlyArray<Question<NpmResponses>> => [
   {
     type: 'input',
     name: 'npm.name',
     message: 'What is the name of your awesome package?',
+    default: name,
   },
   {
     type: 'list',

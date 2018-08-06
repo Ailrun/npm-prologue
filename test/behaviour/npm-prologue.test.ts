@@ -23,8 +23,8 @@ describe('npm-prolgue', () => {
     await promisify(rimraf)(join(__dirname, '__temp__/*'));
   });
 
-  it('should be able to run normally', async () => {
-    spawnNpmPrologue();
+  it('should be able to run normally with an argument which is the name for new directory', async () => {
+    spawnNpmPrologue('test-package');
     /**
      * @desc
      * `exitCode` promise should be created initially since it cannot detect
@@ -38,7 +38,6 @@ describe('npm-prolgue', () => {
     expect(logo).toMatchSnapshot('logo');
 
     await inquirerUtils.giveInputs(npmPrologue, [
-      'test-package',
       inquirerUtils.ENTER,
       inquirerUtils.DOWN,
       inquirerUtils.ENTER,
@@ -47,7 +46,7 @@ describe('npm-prolgue', () => {
     const code = await exitCodePromise;
     expect(code).toBe(0);
 
-    expect(readFileSync(join(cwd, 'package.json'), 'utf-8').trim()).toBe([
+    expect(readFileSync(join(cwd, 'test-package', 'package.json'), 'utf-8').trim()).toBe([
       '{',
       '  "name": "test-package",',
       '  "version": "0.0.1"',
