@@ -51,7 +51,7 @@ describe('npm-prologue', () => {
 
     const helpMessage = await processUtils.readTrimed(npmPrologue.stdout);
     expect(helpMessage).toBe([
-      '  Usage: npm-prologue <directory-name> [options]',
+      '  Usage: npm-prologue <directory-path> [options]',
       '',
       '  Options:',
       '',
