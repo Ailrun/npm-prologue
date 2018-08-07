@@ -1,3 +1,4 @@
+import path from 'path';
 import process from 'process';
 
 import inquirer from 'inquirer';
@@ -36,8 +37,9 @@ export const main = async () => {
     return;
   }
 
+  const packageName = path.basename(directoryPath);
   const responses = await inquirer.prompt([
-    ...npmPrompts(directoryPath),
+    ...npmPrompts(packageName),
   ]);
 
   createPackageJson({

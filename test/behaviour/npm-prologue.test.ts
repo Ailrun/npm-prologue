@@ -91,4 +91,30 @@ describe('npm-prologue', () => {
       '',
     ].join('\n'));
   });
+
+  it('should run normally with path with more than one segments', async () => {
+    spawnNpmPrologue('project/test-package');
+    const exitCodePromise = processUtils.exitCode(npmPrologue);
+
+    const logo = await processUtils.read(npmPrologue.stdout);
+    expect(logo).toBe(logoSnapshot);
+
+    await inquirerUtils.giveInputs(npmPrologue, [
+      inquirerUtils.ENTER,
+      inquirerUtils.DOWN,
+      inquirerUtils.DOWN,
+      inquirerUtils.ENTER,
+    ]);
+
+    const code = await exitCodePromise;
+    expect(code).toBe(0);
+
+    expect(readFileSync(join(cwd, 'project', 'test-package', 'package.json'), 'utf-8')).toBe([
+      '{',
+      '  "name": "test-package",',
+      '  "version": "0.1.0"',
+      '}',
+      '',
+    ].join('\n'));
+  });
 });
