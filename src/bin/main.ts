@@ -1,3 +1,4 @@
+import path from 'path';
 import process from 'process';
 
 import inquirer from 'inquirer';
@@ -12,17 +13,18 @@ export const main = async () => {
   await printLogo();
 
   commander
-    .usage('<directory-name> [options]')
+    .usage('<directory-path> [options]')
 
+  let directoryPath: string | undefined;
   commander
-    .arguments('<directory-name>')
-    .action((directoryName) => {
-      commander.directoryName = directoryName;
+    .arguments('<directory-path>')
+    .action((_directoryPath) => {
+      directoryPath = _directoryPath;
     });
 
   commander.parse(process.argv);
 
-  if (commander.directoryName === undefined) {
+  if (directoryPath === undefined) {
     commander.outputHelp((help) => {
       return help + ([
         '  Examples:',
@@ -32,15 +34,16 @@ export const main = async () => {
       ].join('\n'));
     });
     process.exit(1);
+    return;
   }
 
-  const name = commander.directoryName;
+  const packageName = path.basename(directoryPath);
   const responses = await inquirer.prompt([
-    ...npmPrompts(name),
+    ...npmPrompts(packageName),
   ]);
 
   createPackageJson({
-    directory: name,
+    directory: directoryPath,
     npm: responses.npm,
   });
 };
