@@ -83,11 +83,12 @@ describe('npm-prologue', () => {
     const code = await exitCodePromise;
     expect(code).toBe(0);
 
-    expect(readFileSync(join(cwd, 'test-package', 'package.json'), 'utf-8').trim()).toBe([
+    expect(readFileSync(join(cwd, 'test-package', 'package.json'), 'utf-8')).toBe([
       '{',
       '  "name": "test-package",',
       '  "version": "0.0.1"',
       '}',
-    ].join('\n').trim());
+      '',
+    ].join('\n'));
   });
 });
