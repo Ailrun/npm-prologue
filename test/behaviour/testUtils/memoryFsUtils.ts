@@ -1,12 +1,10 @@
-import { join } from 'path';
-
 export const reset: (
   fs: import('memory-fs'),
 ) => void = (
   fs,
 ) => {
   for (let path of fs.readdirSync('/')) {
-    path = join('/', path);
+    path = fs.join('/', path);
     const stat = fs.statSync(path);
 
     if (stat.isFile()) {
