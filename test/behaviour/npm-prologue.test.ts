@@ -1,7 +1,9 @@
-import { ChildProcess, spawn } from 'child_process';
+import { ChildProcess } from 'child_process';
 import { readFileSync } from 'fs';
 import { join } from 'path';
 import { promisify } from 'util';
+
+import spawn from 'cross-spawn';
 
 import rimraf = require('rimraf');
 
@@ -9,7 +11,7 @@ import { inquirerUtils, packageRoot, processUtils } from './testUtils';
 
 let logoSnapshot: string | undefined;
 
-describe('npm-prolgue', () => {
+describe('npm-prologue', () => {
   const cwd = join(__dirname, '/__temp__');
   const execPath = join(packageRoot, 'dist/npm-prologue.js');
   let spawnNpmPrologue = (...args: string[]) => {

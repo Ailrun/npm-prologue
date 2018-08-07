@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`npm-prolgue should display a fixed logo: logo 1`] = `
+exports[`npm-prologue should display a fixed logo: logo 1`] = `
 "                                                     _                            
   _ __   _ __   _ __ ___          _ __   _ __  ___  | |  ___    __ _  _   _   ___ 
  | '_ \\\\ | '_ \\\\ | '_ \` _ \\\\  _____ | '_ \\\\ | '__|/ _ \\\\ | | / _ \\\\  / _\` || | | | / _ \\\\
