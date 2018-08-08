@@ -1,17 +1,20 @@
+/**
+ * Copyright 2018-present Junyoung Clare Jang
+ */
 import R from 'ramda';
 
 import { PackageJson } from '../types';
 
-import { indent, serializeJsonWithShape, serializationShape } from './serializeJsonWithShape';
+import { indent, serializationShape, serializeJsonWithShape } from './serializeJsonWithShape';
 
 export const serializePackageJson = (
   packageJson: PackageJson.Normalized,
-  indent: number | string = 2,
+  space: number | string = 2,
 ): string => {
-  return serializeJsonWithShape(packageJson, indent, packageJsonStrictBaseShape);
+  return serializeJsonWithShape(packageJson, space, packageJsonStrictBaseShape);
 };
 
-const bugsShape: serializationShape<any> = {
+const bugsShape: serializationShape = {
   order: [
     'url',
     'email',
@@ -76,9 +79,11 @@ const scriptShape: serializationShape<PackageJson.Scripts> = {
     'shrinkwrap',
     'postshrinkwrap',
   ],
-}
+};
 
-const packageJsonStrictBaseShape: serializationShape<PackageJson.Normalized.WellKnown> = {
+type packageJsonStrictBaseShape =
+  serializationShape<PackageJson.Normalized.WellKnown>;
+const packageJsonStrictBaseShape: packageJsonStrictBaseShape = {
   order: [
     'name',
     'version',
@@ -117,20 +122,29 @@ const packageJsonStrictBaseShape: serializationShape<PackageJson.Normalized.Well
     'publishConfig',
   ],
   subserializers: {
-    bugs(bugs: PackageJson.Normalized.Bugs | undefined, space) {
+    bugs(
+      bugs: PackageJson.Normalized.Bugs | undefined,
+      space,
+    ) {
       if (bugs === undefined) {
         return undefined;
       }
       return serializeJsonWithShape(bugs, space, bugsShape);
     },
-    author(author: PackageJson.Normalized.Author | undefined, space) {
+    author(
+      author: PackageJson.Normalized.Author | undefined,
+      space,
+    ) {
       if (author === undefined) {
         return undefined;
       }
 
       return serializeJsonWithShape(author, space, peopleShape);
     },
-    contributors(contributors: PackageJson.Normalized.Contributors | undefined, space) {
+    contributors(
+      contributors: PackageJson.Normalized.Contributors | undefined,
+      space,
+    ) {
       if (contributors === undefined) {
         return undefined;
       }
@@ -152,24 +166,33 @@ const packageJsonStrictBaseShape: serializationShape<PackageJson.Normalized.Well
           [R.propEq('length', 0), R.always('[]')],
           [R.always(!space), (entries) => `[${entries}]`],
           [R.T, (entries) => `[${entries}\n]`],
-        ])
+        ]),
       )(contributors);
     },
-    directories(directories: PackageJson.Normalized.Directories, space) {
+    directories(
+      directories: PackageJson.Normalized.Directories | undefined,
+      space,
+    ) {
       if (directories === undefined) {
         return undefined;
       }
 
       return serializeJsonWithShape(directories, space, directoriesShape);
     },
-    repository(repository: PackageJson.Normalized.Repository, space) {
+    repository(
+      repository: PackageJson.Normalized.Repository | undefined,
+      space,
+    ) {
       if (repository === undefined) {
         return undefined;
       }
 
       return serializeJsonWithShape(repository, space, repositoryShape);
     },
-    scripts(scripts: PackageJson.Normalized.Scripts, space) {
+    scripts(
+      scripts: PackageJson.Normalized.Scripts | undefined,
+      space,
+    ) {
       if (scripts === undefined) {
         return undefined;
       }

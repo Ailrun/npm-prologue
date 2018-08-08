@@ -1,3 +1,6 @@
+/**
+ * Copyright 2018-present Junyoung Clare Jang
+ */
 declare module 'hosted-git-info' {
   type GitHosts =
     | 'github'
@@ -21,24 +24,34 @@ declare module 'hosted-git-info' {
     ;
 
   class GitHost {
-    constructor(type?: GitHosts, user?: string, auth?: string, project?: string, committish?: string, defaultRepresentation?: GitRepresentations, opts: object);
-    hash(): string;
-    ssh(opts?: object): string;
-    sshurl(opts?: object): string;
-    browse(opts?: object): string;
-    browse(P: string, opts?: object): string;
-    browse(P: string, F: string, opts?: object): string;
-    docs(opts?: object): string;
-    bugs(opts?: object): string;
-    https(opts?: object): string;
-    git(opts?: object): string;
-    shortcut(opts?: object): string;
-    path(opts?: object): string;
-    tarball(opts?: object): string;
-    file(P?: string, opts?: object): string;
-    getDefaultRepresentation(): GitRepresentations;
-    toString(opts?: object): string;
+    public constructor(
+      type?: GitHosts,
+      user?: string,
+      auth?: string,
+      project?: string,
+      committish?: string,
+      defaultRepresentation?: GitRepresentations,
+      opts?: object,
+    );
+    public hash(): string;
+    public ssh(opts?: object): string;
+    public sshurl(opts?: object): string;
+    public browse(opts?: object): string;
+    public browse(P: string, opts?: object): string;
+    public browse(P: string, F: string, opts?: object): string;
+    public docs(opts?: object): string;
+    public bugs(opts?: object): string;
+    public https(opts?: object): string;
+    public git(opts?: object): string;
+    public shortcut(opts?: object): string;
+    public path(opts?: object): string;
+    public tarball(opts?: object): string;
+    public file(P?: string, opts?: object): string;
+    public getDefaultRepresentation(): GitRepresentations;
+    public toString(opts?: object): string;
   }
 
-  export function fromUrl(giturl: string, opts?: fromUrlOptions): GitHost | undefined;
+  export function fromUrl(
+    giturl: string, opts?: fromUrlOptions,
+  ): GitHost | undefined;
 }

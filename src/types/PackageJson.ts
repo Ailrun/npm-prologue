@@ -1,3 +1,6 @@
+/**
+ * Copyright 2018-present Junyoung Clare Jang
+ */
 export interface PackageJson extends PackageJson.WellKnown {
   readonly [key: string]: any;
 }
@@ -119,7 +122,7 @@ export namespace PackageJson {
   }
 
   type Types = string;
-  type SideEffects = false | Array<string>;
+  type SideEffects = false | string[];
   type Flat = boolean;
   type Unpkg = string;
   type Module = string;
@@ -130,10 +133,12 @@ export namespace PackageJson {
   type Es2015 = string;
 
   export namespace Normalized {
+    //tslint:disable: no-shadowed-variable
     export interface Standard extends RequiredFields, Partial<OptionalFields> { }
 
     export interface WellKnown extends Standard, Partial<WellKnownFields> { }
 
+    //tslint:disable-next-line: no-empty-interface
     export interface RequiredFields extends RF { }
 
     export type Name = string;
@@ -176,10 +181,12 @@ export namespace PackageJson {
     export type Contributors = ReadonlyArray<PackageJson.People>;
     export type Files = ReadonlyArray<string>;
     export type Main = string;
+    //tslint:disable-next-line: interface-over-type-literal
     export type Bin = {
       readonly [key: string]: string | undefined;
     };
-    export type Man = Array<string>;
+    export type Man = string[];
+    //tslint:disable-next-line: interface-over-type-literal
     export type Directories = {
       readonly lib?: string;
       readonly bin?: string;
@@ -188,10 +195,12 @@ export namespace PackageJson {
       readonly example?: string;
       readonly test?: string;
     };
+    //tslint:disable-next-line: interface-over-type-literal
     export type Repository = {
       readonly type: string;
       readonly url: string;
     };
+    //tslint:disable-next-line: interface-over-type-literal
     export type Scripts = {
       readonly prepare?: string;
       readonly prepublishOnly?: string;
@@ -224,33 +233,41 @@ export namespace PackageJson {
       readonly postshrinkwrap?: string;
       readonly [key: string]: string | undefined;
     };
+    //tslint:disable-next-line: interface-over-type-literal
     export type Config = {
       readonly [key: string]: string | undefined;
     };
+    //tslint:disable-next-line: interface-over-type-literal
     export type Dependencies = {
       readonly [key: string]: string | undefined;
     };
+    //tslint:disable-next-line: interface-over-type-literal
     export type DevDependencies = {
       readonly [key: string]: string | undefined;
     };
+    //tslint:disable-next-line: interface-over-type-literal
     export type PeerDependencies = {
       readonly [key: string]: string | undefined;
     };
-    export type BundledDependencies = Array<string>;
+    export type BundledDependencies = string[];
+    //tslint:disable-next-line: interface-over-type-literal
     export type OptionalDependencies = {
       readonly [key: string]: string | undefined;
     };
+    //tslint:disable-next-line: interface-over-type-literal
     export type Engines = {
       readonly node: string;
       readonly npm?: string;
       readonly [key: string]: string | undefined;
     };
-    export type Os = Array<string>;
-    export type Cpu = Array<string>;
+    export type Os = string[];
+    export type Cpu = string[];
     export type Private = boolean;
+    //tslint:disable-next-line: interface-over-type-literal
     export type PublishConfig = {
       readonly [key: string]: string | undefined;
     };
+    //tslint:enable: no-shadowed-variable
   }
 
   export interface People {

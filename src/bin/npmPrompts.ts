@@ -1,9 +1,12 @@
+/**
+ * Copyright 2018-present Junyoung Clare Jang
+ */
 import { Question } from 'inquirer';
 
 export interface NpmResponses {
   npm: {
-    name: string,
-    version: '0.0.0' | '0.0.1' | '0.1.0' | '1.0.0',
+    name: string;
+    version: '0.0.0' | '0.0.1' | '0.1.0' | '1.0.0';
   };
 }
 

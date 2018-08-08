@@ -1,8 +1,13 @@
+/**
+ * Copyright 2018-present Junyoung Clare Jang
+ */
 import { fromUrl } from 'hosted-git-info';
 
 import { PackageJson, TypeUtils } from '../types';
 
-export const tightenPackageJson = (packageJson: PackageJson): PackageJson.Normalized => {
+export const tightenPackageJson = (
+  packageJson: PackageJson,
+): PackageJson.Normalized => {
   const result: TypeUtils.Writable<PackageJson.Normalized.WellKnown> = {
     name: packageJson.name,
     version: packageJson.version,
@@ -46,7 +51,9 @@ export const tightenPackageJson = (packageJson: PackageJson): PackageJson.Normal
   };
 };
 
-const tightenBugs = (bugs: PackageJson.Bugs): PackageJson.Normalized.Bugs => {
+const tightenBugs = (
+  bugs: PackageJson.Bugs,
+): PackageJson.Normalized.Bugs => {
   if (typeof bugs !== 'string') {
     return bugs;
   }
@@ -56,7 +63,9 @@ const tightenBugs = (bugs: PackageJson.Bugs): PackageJson.Normalized.Bugs => {
   };
 };
 
-const tightenPeople = (people: PackageJson.Author): PackageJson.People => {
+const tightenPeople = (
+  people: PackageJson.Author,
+): PackageJson.People => {
   if (typeof people !== 'string') {
     return people;
   }
@@ -64,7 +73,9 @@ const tightenPeople = (people: PackageJson.Author): PackageJson.People => {
   return parsePeople(people);
 };
 
-const parsePeople = (people: string): PackageJson.People => {
+const parsePeople = (
+  people: string,
+): PackageJson.People => {
   const match = people.match(/([^<(]*) *(?:<(.*)>)? *(?:\((.*)\))?/);
   if (match === null) {
     throw new Error('Field is not a valid people');
@@ -86,7 +97,10 @@ const parsePeople = (people: string): PackageJson.People => {
   return result;
 };
 
-const tightenBin = (packageName: string, bin: PackageJson.Bin): PackageJson.Normalized.Bin => {
+const tightenBin = (
+  packageName: string,
+  bin: PackageJson.Bin,
+): PackageJson.Normalized.Bin => {
   if (typeof bin !== 'string') {
     return bin;
   }
@@ -96,7 +110,9 @@ const tightenBin = (packageName: string, bin: PackageJson.Bin): PackageJson.Norm
   };
 };
 
-const tightenMan = (man: PackageJson.Man): PackageJson.Normalized.Man => {
+const tightenMan = (
+  man: PackageJson.Man,
+): PackageJson.Normalized.Man => {
   if (typeof man !== 'string') {
     return man;
   }
@@ -106,7 +122,9 @@ const tightenMan = (man: PackageJson.Man): PackageJson.Normalized.Man => {
   ];
 };
 
-const tightenRepository = (repository: PackageJson.Repository): PackageJson.Normalized.Repository => {
+const tightenRepository = (
+  repository: PackageJson.Repository,
+): PackageJson.Normalized.Repository => {
   let result: any;
 
   if (typeof repository === 'string') {
@@ -124,7 +142,7 @@ const tightenRepository = (repository: PackageJson.Repository): PackageJson.Norm
     const hosted = fromUrl(result.url);
     if (hosted) {
       result.url =
-        hosted.getDefaultRepresentation() == 'shortcut' ?
+        hosted.getDefaultRepresentation() === 'shortcut' ?
         hosted.https() :
         hosted.toString();
     }
