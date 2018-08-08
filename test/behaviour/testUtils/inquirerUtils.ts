@@ -1,9 +1,9 @@
-import { ChildProcess } from "child_process";
+import { ChildProcess } from 'child_process';
 import R from 'ramda';
 
-import { write } from "./processUtils";
+import { write } from './processUtils';
 
-const wait = (time: number) => new Promise((resolve) => {
+const wait = async (time: number) => new Promise<void>((resolve) => {
   setTimeout(resolve, time);
 });
 
@@ -17,13 +17,13 @@ export const pressKeys = async (process: ChildProcess, ...keys: (string | string
   for (const key of R.chain((key) => Array.isArray(key) ? key : [key], keys)) {
     await pressKey(process, key);
   }
-}
+};
 export const giveInputs = pressKeys;
 
 export const pressEnter = async (process: ChildProcess) => {
   return pressKey(process, ENTER);
 };
-export const pressDown = (process: ChildProcess) => {
+export const pressDown = async (process: ChildProcess) => {
   return pressKey(process, DOWN);
 };
 export const pressUp = async (process: ChildProcess) => {

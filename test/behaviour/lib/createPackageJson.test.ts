@@ -71,7 +71,7 @@ describe('createProject', () => {
       npm: {
         name: 'test-package',
         version: '0.0.0',
-        description: ''
+        description: '',
       },
     })).resolves.not.toThrowError();
     memoryFsUtils.reset(fs as any);
@@ -88,7 +88,7 @@ describe('createProject', () => {
       npm: {
         name: 'test-package',
         version: '0.0.0',
-        description: ''
+        description: '',
       },
     })).resolves.not.toThrowError();
     memoryFsUtils.reset(fs as any);
@@ -98,7 +98,7 @@ describe('createProject', () => {
       npm: {
         name: 'test-package',
         version: '0.0.0',
-        description: ''
+        description: '',
       },
     })).resolves.not.toThrowError();
     memoryFsUtils.reset(fs as any);
@@ -108,7 +108,7 @@ describe('createProject', () => {
       npm: {
         name: 'test-package',
         version: '0.0.0',
-        description: ''
+        description: '',
       },
     })).resolves.not.toThrowError();
     memoryFsUtils.reset(fs as any);

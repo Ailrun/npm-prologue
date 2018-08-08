@@ -14,7 +14,7 @@ let logoSnapshot: string | undefined;
 describe('npm-prologue', () => {
   const cwd = join(__dirname, '/__temp__');
   const execPath = join(packageRoot, 'dist/npm-prologue.js');
-  let spawnNpmPrologue = (...args: string[]) => {
+  const spawnNpmPrologue = (...args: string[]) => {
     npmPrologue = spawn(execPath, args, {
       stdio: 'pipe',
       cwd,

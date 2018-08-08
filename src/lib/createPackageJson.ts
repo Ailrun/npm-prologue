@@ -1,3 +1,6 @@
+/**
+ * Copyright 2018-present Junyoung Clare Jang
+ */
 import fs from 'fs';
 import path from 'path';
 import util from 'util';
@@ -16,7 +19,9 @@ export interface createPackageJsonOptions {
   [key: string]: any;
 }
 
-export const createPackageJson = async (options: createPackageJsonOptions) => {
+export const createPackageJson = async (
+  options: createPackageJsonOptions,
+) => {
   const {
     directory = '.',
     indent = 2,
@@ -28,5 +33,9 @@ export const createPackageJson = async (options: createPackageJsonOptions) => {
     ...options.npm,
   });
 
-  return util.promisify(fs.writeFile.bind(fs))(packageJsonPath, serializePackageJson(packageJsonContent, indent) + '\n', 'utf-8');
+  return util.promisify(fs.writeFile.bind(fs))(
+    packageJsonPath,
+    serializePackageJson(packageJsonContent, indent) + '\n',
+    'utf-8',
+  );
 };

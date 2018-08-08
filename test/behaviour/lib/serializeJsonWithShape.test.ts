@@ -1,4 +1,4 @@
-import { serializeJsonWithShape, serializationShape } from '$/lib/serializeJsonWithShape';
+import { serializationShape, serializeJsonWithShape } from '$/lib/serializeJsonWithShape';
 
 const testShape0: serializationShape = {
   order: [],
@@ -13,13 +13,13 @@ const testShape1: serializationShape = {
   subserializers: {},
 };
 const testObject1 = {
-  that: "abc",
+  that: 'abc',
   theirs: true,
   this: {
     world: ['is'],
     other: 12,
   },
-  more: "value",
+  more: 'value',
 };
 const testRegExp1_0 = RegExp(`
 {"this":{[^}]*},"that":"abc","theirs":true,[^}]*}

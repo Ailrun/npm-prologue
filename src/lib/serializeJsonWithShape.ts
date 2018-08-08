@@ -1,3 +1,6 @@
+/**
+ * Copyright 2018-present Junyoung Clare Jang
+ */
 import R from 'ramda';
 
 import { TypeUtils } from '../types';
@@ -24,13 +27,16 @@ export const serializeJsonWithShape = <T extends object>(
   }
 
   const { order, subserializers } = shape;
+  const maxSpaceLength = 10;
 
   if (typeof space === 'number') {
-    space = Math.min(10, space);
+    //tslint:disable-next-line: no-parameter-reassignment
+    space = Math.min(maxSpaceLength, space);
   }
 
   if (typeof space === 'string') {
-    space = space.substring(0, 10);
+    //tslint:disable-next-line: no-parameter-reassignment
+    space = space.substring(0, maxSpaceLength);
   }
 
   const subserializing = subserializers !== undefined ?
@@ -43,7 +49,10 @@ export const serializeJsonWithShape = <T extends object>(
           JSON.stringify(json[key], undefined, space),
       )),
     ) :
-    R.map((key: keyof T) => R.pair(key, JSON.stringify(json[key], undefined, space)));
+    R.map((key: keyof T) => R.pair(
+      key,
+      JSON.stringify(json[key], undefined, space),
+    ));
 
   const addingSpaces = space ?
     R.pipe(
@@ -52,12 +61,18 @@ export const serializeJsonWithShape = <T extends object>(
     ) :
     R.identity as (a: string[]) => string[];
 
+  type FilterOperation = (
+    list: ReadonlyArray<[keyof T, string | undefined]>,
+  ) => [keyof T, string][];
+
   return R.pipe(
     Object.keys as (a: T) => (keyof T)[],
-    sortByIndexOrder(order),
+    sortByReferenceOrder(order),
     subserializing,
-    R.filter(([,str]) => str !== undefined) as (list: ReadonlyArray<[keyof T, string | undefined]>) => [keyof T, string][],
-    R.map(([key, str]: [keyof T, string]) => space ? `"${key}": ${str}` : `"${key}":${str}`),
+    R.filter(([, str]) => str !== undefined) as FilterOperation,
+    R.map(([key, str]: [keyof T, string]) => {
+      return space ? `"${key}": ${str}` : `"${key}":${str}`;
+    }),
     addingSpaces,
     R.join(','),
     R.cond([
@@ -68,27 +83,31 @@ export const serializeJsonWithShape = <T extends object>(
   )(json);
 };
 
-export const indent = (spaces: Exclude<TypeUtils.P3<typeof JSON.stringify>, undefined>) => {
-  spaces = typeof spaces === 'string' ?
+export const indent = (
+  spaces: Exclude<TypeUtils.P3<typeof JSON.stringify>, undefined>,
+) => {
+  const stringSpaces = typeof spaces === 'string' ?
     spaces :
     ' '.repeat(spaces);
 
   return R.pipe(
     R.split('\n'),
-    R.map((line) => `${spaces}${line}`),
+    R.map((line) => `${stringSpaces}${line}`),
     R.join('\n'),
   );
 };
 
-const sortByIndexOrder = <T extends U, U>(
-  index: T[],
+const sortByReferenceOrder = <T extends U, U>(
+  reference: T[],
 ) => {
+  const notFoundIndex = -1;
+
   return R.pipe(
-    R.map((value: U) => R.pair(value, (index as U[]).indexOf(value))),
+    R.map((value: U) => R.pair(value, (reference as U[]).indexOf(value))),
     R.map(([value, index]: [U, number]) => {
-      return R.pair(value, index === -1 ? Infinity : index);
+      return R.pair(value, index === notFoundIndex ? Infinity : index);
     }),
     R.sortBy(([, index]) => index),
-    R.map(([value, ]: [U, number]) => value),
+    R.map(([value]: [U, number]) => value),
   );
 };
