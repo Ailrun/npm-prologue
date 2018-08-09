@@ -1,0 +1,9 @@
+{
+  "extends": "../../config/tslint/tslint.test.json",
+  "linterOptions": {
+    "exclude": [
+      "../../[!test]",
+      "../../test/[!behaviour]"
+    ]
+  }
+}

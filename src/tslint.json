@@ -1,0 +1,8 @@
+{
+  "extends": "../config/tslint/tslint.base.json",
+  "linterOptions": {
+    "exclude": [
+      "../[!src]"
+    ]
+  }
+}
