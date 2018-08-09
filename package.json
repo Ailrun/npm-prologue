@@ -38,8 +38,8 @@
     "test": "npm-run-all -s test:*",
     "test:behaviour": "jest --config=./config/jest/jest.config.js",
     "test:styles": "npm-run-all -s test:styles:*",
-    "test:styles:src": "tslint -c ./config/tslint/tslint.base.json -p ./tsconfig.json",
-    "test:styles:test": "tslint -c ./config/tslint/tslint.test.json -p ./test/behaviour/tsconfig.json",
+    "test:styles:src": "tslint -c ./src/tslint.json -p ./src/tsconfig.json",
+    "test:styles:test": "tslint -c ./test/behaviour/tslint.json -p ./test/behaviour/tsconfig.json",
     "test:types": "dtslint ./test/types"
   },
   "dependencies": {
