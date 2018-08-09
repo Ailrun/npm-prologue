@@ -15,7 +15,7 @@ import { tightenPackageJson } from './tightenPackageJson';
 export interface createPackageJsonOptions {
   readonly directory?: string;
   readonly indent?: number | string;
-  readonly npm: PackageJson.Normalized;
+  readonly npm: PackageJson;
   [key: string]: any;
 }
 
