@@ -34,6 +34,7 @@ export const main = async () => {
         '',
         `    $ ${commander.name()} --help`,
         `    $ ${commander.name()} my-new-awesome-package`,
+        '',
       ].join('\n'));
     });
     process.exit(1);
