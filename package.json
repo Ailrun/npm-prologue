@@ -1,6 +1,6 @@
 {
   "name": "npm-prologue",
-  "version": "0.0.1",
+  "version": "0.0.2-alpha.0",
   "description": "NPM package/project bootstrapper for Junyoung Clare Jang",
   "keywords": [
     "boilerplate",
@@ -18,7 +18,7 @@
     "url": "https://Ailrun.github.io"
   },
   "files": [
-    "./dist"
+    "./dist/[!npm-prologue.js]"
   ],
   "main": "./dist/index.js",
   "bin": {
