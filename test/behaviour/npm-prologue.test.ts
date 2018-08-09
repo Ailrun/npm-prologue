@@ -49,8 +49,9 @@ describe('npm-prologue', () => {
     const logo = await processUtils.read(npmPrologue.stdout);
     expect(logo).toMatch(logoSnapshot);
 
-    const helpMessage = await processUtils.readTrimed(npmPrologue.stdout);
+    const helpMessage = await processUtils.read(npmPrologue.stdout);
     expect(helpMessage).toBe([
+      '',
       '  Usage: npm-prologue <directory-path> [options]',
       '',
       '  Options:',
@@ -61,7 +62,8 @@ describe('npm-prologue', () => {
       '',
       '    $ npm-prologue --help',
       '    $ npm-prologue my-new-awesome-package',
-    ].join('\n').trim());
+      '',
+    ].join('\n'));
 
     const code = await exitCodePromise;
     expect(code).toBe(1);
