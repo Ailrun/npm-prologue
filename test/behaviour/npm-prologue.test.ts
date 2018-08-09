@@ -75,8 +75,23 @@ describe('npm-prologue', () => {
     expect(logo).toMatch(logoSnapshot);
 
     await inquirerUtils.giveInputs(npmPrologue, [
+      // Making name
       inquirerUtils.ENTER,
+      // Making version
       inquirerUtils.DOWN,
+      inquirerUtils.ENTER,
+      // Making keywords
+      inquirerUtils.ENTER,
+      // Making license
+      inquirerUtils.ENTER,
+      // Making author
+      inquirerUtils.ENTER,
+      // Making main
+      inquirerUtils.ENTER,
+      // Making repository.type
+      inquirerUtils.ENTER,
+      // Making repository.url
+      'https://somewhere.com',
       inquirerUtils.ENTER,
     ]);
 
@@ -86,7 +101,14 @@ describe('npm-prologue', () => {
     expect(readFileSync(join(cwd, 'test-package', 'package.json'), 'utf-8')).toBe([
       '{',
       '  "name": "test-package",',
-      '  "version": "0.0.1"',
+      '  "version": "0.0.1",',
+      '  "keywords": [],',
+      '  "license": "MIT",',
+      '  "main": "index.js",',
+      '  "repository": {',
+      '    "type": "git",',
+      '    "url": "https://somewhere.com"',
+      '  }',
       '}',
       '',
     ].join('\n'));
@@ -100,9 +122,28 @@ describe('npm-prologue', () => {
     expect(logo).toBe(logoSnapshot);
 
     await inquirerUtils.giveInputs(npmPrologue, [
+      // Making name
       inquirerUtils.ENTER,
+      // Making version
       inquirerUtils.DOWN,
       inquirerUtils.DOWN,
+      inquirerUtils.ENTER,
+      // Making keywords
+      'ABC, DEF',
+      inquirerUtils.ENTER,
+      // Making license
+      inquirerUtils.DOWN,
+      inquirerUtils.ENTER,
+      // Making author
+      'Junyoung Park <where@are.you>',
+      inquirerUtils.ENTER,
+      // Making main
+      'some.ts',
+      inquirerUtils.ENTER,
+      // Making repository.type
+      inquirerUtils.ENTER,
+      // Making repository.url
+      'https://my.repo.com',
       inquirerUtils.ENTER,
     ]);
 
@@ -112,7 +153,21 @@ describe('npm-prologue', () => {
     expect(readFileSync(join(cwd, 'project', 'test-package', 'package.json'), 'utf-8')).toBe([
       '{',
       '  "name": "test-package",',
-      '  "version": "0.1.0"',
+      '  "version": "0.1.0",',
+      '  "keywords": [',
+      '    "ABC",',
+      '    "DEF"',
+      '  ],',
+      '  "license": "BSD-4-Clause",',
+      '  "author": {',
+      '    "name": "Junyoung Park",',
+      '    "email": "where@are.you"',
+      '  },',
+      '  "main": "some.ts",',
+      '  "repository": {',
+      '    "type": "git",',
+      '    "url": "https://my.repo.com"',
+      '  }',
       '}',
       '',
     ].join('\n'));
