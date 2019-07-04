@@ -40,7 +40,9 @@
     "test:styles": "npm-run-all -s test:styles:*",
     "test:styles:src": "tslint -c ./src/tslint.json -p ./src/tsconfig.json",
     "test:styles:test": "tslint -c ./test/behaviour/tslint.json -p ./test/behaviour/tsconfig.json",
-    "test:types": "dtslint ./test/types"
+    "test:types": "dtslint ./test/types",
+    "snyk-protect": "snyk protect",
+    "prepare": "npm run snyk-protect"
   },
   "dependencies": {
     "commander": "^2.17.0",
@@ -49,7 +51,8 @@
     "hosted-git-info": "^2.7.1",
     "inquirer": "^6.0.0",
     "mkdirp": "^0.5.1",
-    "ramda": "^0.25.0"
+    "ramda": "^0.25.0",
+    "snyk": "^1.189.0"
   },
   "devDependencies": {
     "@types/chai": "^4.1.4",
@@ -75,5 +78,6 @@
     "ts-jest": "^22.4.6",
     "tslint": "^5.11.0",
     "typescript": "^2.9.2"
-  }
+  },
+  "snyk": true
 }
