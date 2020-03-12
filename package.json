@@ -48,7 +48,7 @@
     "gradient-string": "^1.1.0",
     "hosted-git-info": "^2.7.1",
     "inquirer": "^6.0.0",
-    "mkdirp": "^0.5.1",
+    "mkdirp": "^1.0.0",
     "ramda": "^0.25.0"
   },
   "devDependencies": {
