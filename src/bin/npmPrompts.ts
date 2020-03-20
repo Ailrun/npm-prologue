@@ -1,7 +1,7 @@
 /**
  * Copyright 2018-present Junyoung Clare Jang
  */
-import { Question } from 'inquirer';
+import { DistinctQuestion } from 'inquirer';
 
 import { PackageJson } from '../types';
 
@@ -21,7 +21,7 @@ export interface NpmResponses {
 
 export const npmPrompts = (
   name: string,
-): ReadonlyArray<Question<NpmResponses>> => [
+): ReadonlyArray<DistinctQuestion<NpmResponses>> => [
   {
     type: 'input',
     name: 'npm.name',
@@ -44,7 +44,7 @@ export const npmPrompts = (
     type: 'input',
     name: 'npm.keywords',
     message: 'What are keywords for your awesome package?',
-    filter(input) {
+    filter(input: string) {
       return input
         .split(',')
         .map((keyword) => keyword.trim())
@@ -116,7 +116,7 @@ export const npmPrompts = (
     name: 'npm.repository.url',
     message: 'What is the URL of your repository?',
     when({ npm }) {
-      return (npm.repository as any).type !== undefined;
+      return (npm as any).repository.type !== undefined;
     },
   },
 ];

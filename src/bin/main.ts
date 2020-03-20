@@ -1,11 +1,10 @@
 /**
  * Copyright 2018-present Junyoung Clare Jang
  */
-import path from 'path';
-import process from 'process';
-
 import commander from 'commander';
 import inquirer from 'inquirer';
+import path from 'path';
+import process from 'process';
 
 import { createPackageJson } from '../lib';
 
@@ -20,7 +19,7 @@ export const main = async () => {
 
   let directoryPath: string | undefined;
   commander
-    .arguments('<directory-path>')
+    .arguments('[directory-path]')
     .action((_directoryPath: string) => {
       directoryPath = _directoryPath;
     });
@@ -38,7 +37,6 @@ export const main = async () => {
       ].join('\n'));
     });
     process.exit(1);
-    return;
   }
 
   const packageName = path.basename(directoryPath);

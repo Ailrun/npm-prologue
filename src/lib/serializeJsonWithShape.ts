@@ -61,21 +61,18 @@ export const serializeJsonWithShape = <T extends object>(
     ) :
     R.identity as (a: string[]) => string[];
 
-  type FilterOperation = (
-    list: ReadonlyArray<[keyof T, string | undefined]>,
-  ) => [keyof T, string][];
-
   return R.pipe(
     Object.keys as (a: T) => (keyof T)[],
     sortByReferenceOrder(order),
     subserializing,
-    R.filter(([, str]) => str !== undefined) as FilterOperation,
+    R.filter(([, str]: [keyof T, string | undefined]) => str !== undefined) as
+      TypeUtils.F1<[keyof T, string | undefined][], [keyof T, string][]>,
     R.map(([key, str]: [keyof T, string]) => {
       return space ? `"${key}": ${str}` : `"${key}":${str}`;
     }),
     addingSpaces,
     R.join(','),
-    R.cond([
+    R.cond<string, string>([
       [R.propEq('length', 0), R.always('{}')],
       [R.always(!space), (members) => `{${members}}`],
       [R.T, (members) => `{${members}\n}`],

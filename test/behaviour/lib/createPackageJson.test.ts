@@ -1,11 +1,10 @@
+import { createPackageJson, createPackageJsonOptions } from '$/lib/createPackageJson';
 import fs from 'fs';
 import path from 'path';
 
-import { createPackageJson, createPackageJsonOptions } from '$/lib/createPackageJson';
-
 import { memoryFsUtils } from '../testUtils';
 
-jest.mock('fs', () => new (require('memory-fs'))());
+jest.mock('fs', () => new (require('memory-fs'))({}));
 
 const testOptions0: createPackageJsonOptions = {
   npm: {

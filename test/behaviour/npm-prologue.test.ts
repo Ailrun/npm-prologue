@@ -1,11 +1,9 @@
 import { ChildProcess } from 'child_process';
+import spawn from 'cross-spawn';
 import { readFileSync } from 'fs';
 import { join } from 'path';
+import rimraf from 'rimraf';
 import { promisify } from 'util';
-
-import spawn from 'cross-spawn';
-
-import rimraf = require('rimraf');
 
 import { inquirerUtils, packageRoot, processUtils } from './testUtils';
 
@@ -50,20 +48,7 @@ describe('npm-prologue', () => {
     expect(logo).toMatch(logoSnapshot);
 
     const helpMessage = await processUtils.read(npmPrologue.stdout);
-    expect(helpMessage).toBe([
-      '',
-      '  Usage: npm-prologue <directory-path> [options]',
-      '',
-      '  Options:',
-      '',
-      '    -h, --help  output usage information',
-      '',
-      '  Examples:',
-      '',
-      '    $ npm-prologue --help',
-      '    $ npm-prologue my-new-awesome-package',
-      '',
-    ].join('\n'));
+    expect(helpMessage).toMatchSnapshot('help message');
 
     const code = await exitCodePromise;
     expect(code).toBe(1);

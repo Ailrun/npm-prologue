@@ -162,7 +162,7 @@ const packageJsonStrictBaseShape: packageJsonStrictBaseShape = {
         }),
         addingSpaces,
         R.join(','),
-        R.cond([
+        R.cond<string, string>([
           [R.propEq('length', 0), R.always('[]')],
           [R.always(!space), (entries) => `[${entries}]`],
           [R.T, (entries) => `[${entries}\n]`],

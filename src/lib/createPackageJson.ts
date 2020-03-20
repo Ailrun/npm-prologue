@@ -2,10 +2,9 @@
  * Copyright 2018-present Junyoung Clare Jang
  */
 import fs from 'fs';
+import mkdirp from 'mkdirp';
 import path from 'path';
 import util from 'util';
-
-import mkdirp from 'mkdirp';
 
 import { PackageJson } from '../types';
 

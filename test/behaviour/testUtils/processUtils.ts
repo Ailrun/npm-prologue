@@ -14,8 +14,14 @@ export const readTrimed = async (stream: Readable) => {
 };
 
 export const write = async (stream: Writable, str: string) => {
-  return new Promise<void>((resolve) => {
-    stream.write(str, resolve);
+  return new Promise<void>((resolve, reject) => {
+    stream.write(str, (error) => {
+      if (typeof error !== 'undefined') {
+        reject(error);
+      } else {
+        resolve();
+      }
+    });
   });
 };
 
